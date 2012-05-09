@@ -1,0 +1,9 @@
+name: PermissionFinder
+main: me.HariboPenguin.PermissionFinder.PermissionFinder
+version: 1.0
+author: HariboPenguin
+description: Easily find permission nodes for plugins.
+commands:
+  findperms:
+    description: Find the permission nods for a plugin.
+    usage: /findperms [Plugin Name]
