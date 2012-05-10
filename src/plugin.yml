@@ -7,3 +7,6 @@ commands:
   findperms:
     description: Find the permission nods for a plugin.
     usage: /findperms [Plugin Name]
+  dumpperms:
+    description: Dump permission nodes for a plugin to a text file.
+    usage: /dumpperms [Plugin Name]
