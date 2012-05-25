@@ -59,30 +59,22 @@ public class DumpCommand implements CommandExecutor {
                                 
                                 counter++;
                                 
-                            }
-                            
+                            }      
                         }
-                        dumpOut.close();
                         
+                        dumpOut.close();
                         sender.sendMessage(plugin.prefix + ChatColor.GREEN + "Permission nodes successfully dumped to: " + dumpFile.getPath());
                         
                     } catch (IOException ex) {
                         Logger.getLogger(DumpCommand.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
-                }
-                
-                
+                }  
             } else {
                 sender.sendMessage(plugin.prefix + ChatColor.RED + "Plugin is not enabled!");
-            }
-            
+            } 
         } else {
             sender.sendMessage(plugin.prefix + ChatColor.RED + "Command usage is: /dumpperms [Plugin]");
         }
-        
-        
         return true;
     }
     
