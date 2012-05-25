@@ -26,7 +26,7 @@ public class DumpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String CommandLabel, String[] args) {
         
-        if (args.length >= 1) {
+        if (args.length == 1) {
             
             if (Bukkit.getPluginManager().getPlugin(args[0]) != null) {
                 Plugin enteredPlugin = Bukkit.getPluginManager().getPlugin(args[0]);
