@@ -64,7 +64,7 @@ public class FindCommand implements CommandExecutor {
             }
             
         } else {
-            sender.sendMessage(plugin.prefix + ChatColor.RED + "Correct usage is: /findperms [Plugin]");
+            sender.sendMessage(plugin.prefix + ChatColor.RED + "Correct usage is: /findperms [Plugin Name] <Search Terms>");
         }
         
         return true;
