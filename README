@@ -5,3 +5,5 @@ Commands:
 /findperms [Plugin Name] <Search Terms> - Finds all permission nodes for the entered plugin / Searches for a permission node if search terms are entered.
 
 /dumpperms [Plugin Name] - Dumps all permission nodes for the entered plugin to a text file located in the PermissionFinder folder.
+
+Download this plugin at: http://dev.bukkit.org/server-mods/permissionfinder/
