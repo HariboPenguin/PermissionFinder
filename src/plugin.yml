@@ -1,6 +1,6 @@
 name: PermissionFinder
 main: me.HariboPenguin.PermissionFinder.PermissionFinder
-version: 1.2b
+version: 1.2
 author: HariboPenguin
 description: Easily find permission nodes for plugins.
 commands:
