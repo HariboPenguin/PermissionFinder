@@ -1,5 +1,10 @@
 PermissionFinder Changelog
 
+-v1.2-
+
+- Added /dumpperms all command to dump permission nodes of multiple plugins to text files all in one go.
+- Added in plugin metrics.
+
 -v1.1-
 
 - Plugin names are no longer case sensitive.
