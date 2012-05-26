@@ -1,0 +1,11 @@
+PermissionFinder Changelog
+
+-v1.1-
+
+- Plugin names are no longer case sensitive.
+- Search function now also searches through descriptions of permission nodes.
+- Added in permissions for each command. (Forgot about putting in these for 1.0 sorry)
+
+-v1.0-
+
+- Initial Release
