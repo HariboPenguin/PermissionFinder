@@ -1,6 +1,6 @@
 name: PermissionFinder
 main: me.HariboPenguin.PermissionFinder.PermissionFinder
-version: 1.1
+version: 1.2
 author: HariboPenguin
 description: Easily find permission nodes for plugins.
 commands:
@@ -8,8 +8,8 @@ commands:
     description: Find the permission nods for a plugin.
     usage: /findperms [Plugin Name] <Search Term>
   dumpperms:
-    description: Dump permission nodes for a plugin to a text file.
-    usage: /dumpperms [Plugin Name]
+    description: Dump permission nodes for a plugin / all plugins to a text file(s).
+    usage: /dumpperms [Plugin Name | all]
 permissions:
   permissionfinder.findperms:
     description: Gives access to the findperms command.
