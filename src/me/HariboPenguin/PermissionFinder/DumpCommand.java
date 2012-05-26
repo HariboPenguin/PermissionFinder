@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,61 +31,158 @@ public class DumpCommand implements CommandExecutor {
 
             if (args.length == 1) {
 
-                if (getPlugin(args[0]) != null) {
-                    Plugin enteredPlugin = getPlugin(args[0]);
+                if (args[0].equalsIgnoreCase("all")) {
+                    List<Plugin> noPermPlugins = new ArrayList<Plugin>();
+                    List<Plugin> successfulDumpPlugins = new ArrayList<Plugin>();
 
-                    List permList = enteredPlugin.getDescription().getPermissions();
+                    for (Plugin pl : Bukkit.getServer().getPluginManager().getPlugins()) {
+                        List permList = pl.getDescription().getPermissions();
 
-                    if (permList.isEmpty()) {
-                        sender.sendMessage(plugin.prefix + ChatColor.RED + "No permission nodes were found for that plugin");
-                    } else {
+                        if (permList.isEmpty()) {
+                            noPermPlugins.add(pl);
+                        } else {
 
-                        int listSize = permList.size();
-                        int counter = 0;
+                            int listSize = permList.size();
+                            int counter = 0;
 
-                        plugin.getDataFolder().mkdir();
-                        File dumpFile = new File(plugin.getDataFolder().getPath() + File.separatorChar + enteredPlugin.getName() + "-perms.txt");
-                        try {
-                            dumpFile.createNewFile();
+                            plugin.getDataFolder().mkdir();
 
-                            BufferedWriter dumpOut = new BufferedWriter(new FileWriter(dumpFile));
+                            File dumpFile = new File(plugin.getDataFolder().getPath() + File.separatorChar + pl.getName() + "-perms.txt");
 
-                            dumpOut.write("---------- Permission nodes for " + enteredPlugin.getName() + " ----------");
+                            try {
+                                dumpFile.createNewFile();
 
-                            while (counter < listSize) {
-                                Permission permissionNode = (Permission) permList.get(counter);
+                                BufferedWriter dumpOut = new BufferedWriter(new FileWriter(dumpFile));
 
-                                if (args.length == 1) {
+                                dumpOut.write("---------- Permission nodes for " + pl.getName() + " ----------");
 
-                                    dumpOut.newLine();
-                                    dumpOut.write(permissionNode.getName() + " - " + permissionNode.getDescription());
+                                while (counter < listSize) {
+                                    Permission permissionNode = (Permission) permList.get(counter);
 
-                                    counter++;
+                                    if (args.length == 1) {
 
+                                        dumpOut.newLine();
+                                        dumpOut.write(permissionNode.getName() + " - " + permissionNode.getDescription());
+
+                                        counter++;
+
+                                    }
                                 }
+
+                                dumpOut.close();
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(DumpCommand.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
+                            successfulDumpPlugins.add(pl);
 
-                            dumpOut.close();
-                            sender.sendMessage(plugin.prefix + ChatColor.GREEN + "Permission nodes successfully dumped to: " + dumpFile.getPath());
-
-                        } catch (IOException ex) {
-                            Logger.getLogger(DumpCommand.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
+                    
+                    StringBuilder successfulList = new StringBuilder();
+                    
+                    int successPluginListSize = successfulDumpPlugins.size();
+                    int counter = 0;
+                    
+                    while (counter < successPluginListSize) {
+                        Plugin pl = successfulDumpPlugins.get(counter);
+                        
+                        if (successfulList.length() > 0) {
+                            successfulList.append(ChatColor.WHITE + ", ");
+                        }
+                        
+                        successfulList.append(ChatColor.GREEN + pl.getName());
+                        
+                        pl.getName();
+                        
+                        counter++;
+                    }
+                    
+                    StringBuilder unsuccessfulList = new StringBuilder();
+                    
+                    int noSuccessPluginListSize = noPermPlugins.size();
+                    int counter2 = 0;
+                    
+                    while (counter2 < noSuccessPluginListSize) {
+                        Plugin pl = noPermPlugins.get(counter2);
+                        
+                        if (unsuccessfulList.length() > 0) {
+                            unsuccessfulList.append(ChatColor.WHITE + ", ");
+                        }
+                        
+                        unsuccessfulList.append(ChatColor.RED + pl.getName());
+                        
+                        pl.getName();
+                        
+                        counter2++;   
+                    }
+                    
+                    sender.sendMessage(plugin.prefix + ChatColor.GREEN + "The following plugin's permission nodes have been successfully dumped to text files: " + successfulList);
+                    sender.sendMessage(plugin.prefix + ChatColor.RED + "Permission nodes could not be found for the following plugins: " + unsuccessfulList);
+                    
+                    return true;
+
+
                 } else {
-                    sender.sendMessage(plugin.prefix + ChatColor.RED + "Plugin is not enabled!");
+
+                    if (getPlugin(args[0]) != null) {
+                        Plugin enteredPlugin = getPlugin(args[0]);
+
+                        List permList = enteredPlugin.getDescription().getPermissions();
+
+                        if (permList.isEmpty()) {
+                            sender.sendMessage(plugin.prefix + ChatColor.RED + "No permission nodes were found for that plugin");
+                        } else {
+
+                            int listSize = permList.size();
+                            int counter = 0;
+
+                            plugin.getDataFolder().mkdir();
+                            File dumpFile = new File(plugin.getDataFolder().getPath() + File.separatorChar + enteredPlugin.getName() + "-perms.txt");
+                            try {
+                                dumpFile.createNewFile();
+
+                                BufferedWriter dumpOut = new BufferedWriter(new FileWriter(dumpFile));
+
+                                dumpOut.write("---------- Permission nodes for " + enteredPlugin.getName() + " ----------");
+
+                                while (counter < listSize) {
+                                    Permission permissionNode = (Permission) permList.get(counter);
+
+                                    if (args.length == 1) {
+
+                                        dumpOut.newLine();
+                                        dumpOut.write(permissionNode.getName() + " - " + permissionNode.getDescription());
+
+                                        counter++;
+
+                                    }
+                                }
+
+                                dumpOut.close();
+                                sender.sendMessage(plugin.prefix + ChatColor.GREEN + "Permission nodes successfully dumped to: " + dumpFile.getPath());
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(DumpCommand.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else {
+                        sender.sendMessage(plugin.prefix + ChatColor.RED + "Plugin is not enabled!");
+                    }
                 }
+                
             } else {
-                sender.sendMessage(plugin.prefix + ChatColor.RED + "Command usage is: /dumpperms [Plugin]");
+                sender.sendMessage(plugin.prefix + ChatColor.RED + "Command usage is: /dumpperms [Plugin Name | all]");
             }
 
         } else {
             sender.sendMessage(plugin.prefix + ChatColor.RED + "You do not have permission for this command!");
         }
-        
+
         return true;
     }
-    
+
     public Plugin getPlugin(String pluginName) {
 
         for (Plugin pl : Bukkit.getServer().getPluginManager().getPlugins()) {

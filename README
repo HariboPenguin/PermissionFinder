@@ -4,7 +4,7 @@ Commands:
 
 /findperms [Plugin Name] <Search Terms> - Finds all permission nodes for the entered plugin / Searches for a permission node if search terms are entered.
 
-/dumpperms [Plugin Name] - Dumps all permission nodes for the entered plugin to a text file located in the PermissionFinder folder.
+/dumpperms [Plugin Name | all] - Dumps all permission nodes for the entered plugin / all plugins to a text file(s) located in the PermissionFinder folder.
 
 Permissions:
 permissionfinder.findperms - Gives access to the findperms command.
