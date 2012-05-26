@@ -43,7 +43,7 @@ public class FindCommand implements CommandExecutor {
                             
                             String permissionToFind = args[1];
                             
-                            if (permissionNode.getName().contains(permissionToFind)) {
+                            if (permissionNode.getName().contains(permissionToFind) || permissionNode.getDescription().toLowerCase().contains(permissionToFind.toLowerCase())) {
                                 sender.sendMessage(ChatColor.RED + permissionNode.getName() + ChatColor.GOLD + " - " + ChatColor.GRAY + permissionNode.getDescription());
                             }
                             
