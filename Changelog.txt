@@ -1,6 +1,11 @@
 PermissionFinder Changelog
 
+-v1.2.2-
+
+- Bug Fix: Searches that return no results now display a message saying no results were found.
+
 -v1.2.1-
+
 - Searching permisison node names is no longer case sensitive.
 - Corrected typo :P
 
