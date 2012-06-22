@@ -1,4 +1,4 @@
-package me.HariboPenguin.PermissionFinder;
+package uk.co.HariboPenguin.PermissionFinder;
 /*
  * Copyright 2011 Tyler Blair. All rights reserved.
  *

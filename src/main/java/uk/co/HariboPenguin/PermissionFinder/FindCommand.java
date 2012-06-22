@@ -1,4 +1,4 @@
-package me.HariboPenguin.PermissionFinder;
+package uk.co.HariboPenguin.PermissionFinder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
