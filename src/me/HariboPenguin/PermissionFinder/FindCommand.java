@@ -1,6 +1,14 @@
 package me.HariboPenguin.PermissionFinder;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,6 +20,7 @@ import org.bukkit.plugin.Plugin;
 public class FindCommand implements CommandExecutor {
 
     public PermissionFinder plugin;
+    private String urlStart = ""; // TODO Add url to permission database here
 
     public FindCommand(PermissionFinder instance) {
         this.plugin = instance;
@@ -30,7 +39,21 @@ public class FindCommand implements CommandExecutor {
                     List permList = enteredPlugin.getDescription().getPermissions();
 
                     if (permList.isEmpty()) {
-                        sender.sendMessage(plugin.prefix + ChatColor.RED + "No permission nodes were found for that plugin");
+                        try {
+                            int responseCode = getResponseCode(urlStart + enteredPlugin.getName() + "-perms.txt");
+                            
+                            if (responseCode == 200) {
+                                readRemoteFile(urlStart + enteredPlugin.getName() + "-perms.txt", sender);
+                                return true;
+                            }
+                            
+                            sender.sendMessage(plugin.prefix + ChatColor.RED + "No permission nodes were found for that plugin");
+                            return true;
+                        } catch (MalformedURLException ex) {
+                            Logger.getLogger(FindCommand.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(FindCommand.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else {
 
                         int listSize = permList.size();
@@ -90,5 +113,29 @@ public class FindCommand implements CommandExecutor {
             }
         }
         return null;
+    }
+    
+    public static int getResponseCode(String urlString) throws MalformedURLException, IOException {
+
+        URL u = new URL(urlString);
+        HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+        huc.setRequestMethod("GET");
+        huc.connect();
+        return huc.getResponseCode();
+    }
+    
+    public static void readRemoteFile(String urlString, CommandSender sender) {
+        try {
+            // Create a URL for the desired page
+            URL url = new URL(urlString);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String str;
+            while ((str = in.readLine()) != null) {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', str));
+            }
+            in.close();
+        } catch (MalformedURLException e) {
+        } catch (IOException e) {
+        }
     }
 }
