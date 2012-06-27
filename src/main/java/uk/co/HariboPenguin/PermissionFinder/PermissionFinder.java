@@ -12,6 +12,7 @@ public class PermissionFinder extends JavaPlugin {
 
     public FindCommand cmdExecutor = new FindCommand(this);
     public DumpCommand dumpExecutor = new DumpCommand(this);
+    public AddCommand addExecutor = new AddCommand(this);
     public String prefix = ChatColor.DARK_PURPLE + "[" + ChatColor.GOLD + "PermissionFinder" + ChatColor.DARK_PURPLE + "] ";
 
     @Override
@@ -28,6 +29,7 @@ public class PermissionFinder extends JavaPlugin {
 
         getCommand("findperms").setExecutor(cmdExecutor);
         getCommand("dumpperms").setExecutor(dumpExecutor);
+        getCommand("addperms").setExecutor(addExecutor);
 
     }
     
