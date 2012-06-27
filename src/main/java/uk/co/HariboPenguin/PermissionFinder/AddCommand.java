@@ -43,7 +43,7 @@ public class AddCommand implements CommandExecutor {
                                 Permission permissionNode = (Permission) permList.get(counter);
                                 
                                 PermissionFinder.perms.playerAdd(enteredPlayer, permissionNode.getName());
-                                sender.sendMessage(plugin.prefix + ChatColor.GREEN + permissionNode.getName() + "added to " + enteredPlayer.getName());
+                                sender.sendMessage(plugin.prefix + ChatColor.GREEN + permissionNode.getName() + " added to " + enteredPlayer.getName());
                                 
                                 counter++;
                             }
@@ -70,7 +70,7 @@ public class AddCommand implements CommandExecutor {
                                 Permission permissionNode = (Permission) permList.get(counter);
                                 
                                 PermissionFinder.perms.playerAdd(enteredPlayer, permissionNode.getName());
-                                sender.sendMessage(plugin.prefix + ChatColor.GREEN + permissionNode.getName() + "added to " + enteredPlayer.getName());
+                                sender.sendMessage(plugin.prefix + ChatColor.GREEN + permissionNode.getName() + " added to " + enteredPlayer.getName());
                                 
                                 counter++;
                             }
