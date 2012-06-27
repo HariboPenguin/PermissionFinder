@@ -47,14 +47,10 @@ public class AddCommand implements CommandExecutor {
                                 
                             }
                             
-                            
                         } else {
                             sender.sendMessage(plugin.prefix + ChatColor.RED + "No permission nodes were found for that plugin");
                             return true;
                         }
-                        
-                        
-                        plugin.perms.playerAdd(enteredPlayer, "permissionfinder.blarg");
                         
                     } else if (plugin.getServer().getOfflinePlayer(args[1]) != null) {
                         
