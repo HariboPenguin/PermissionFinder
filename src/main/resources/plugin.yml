@@ -1,5 +1,5 @@
 name: PermissionFinder
-main: me.HariboPenguin.PermissionFinder.PermissionFinder
+main: uk.co.HariboPenguin.PermissionFinder.PermissionFinder
 version: 1.3b
 author: HariboPenguin
 depend: [Vault]
