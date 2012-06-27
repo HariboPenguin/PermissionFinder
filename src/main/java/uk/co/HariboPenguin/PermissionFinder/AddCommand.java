@@ -45,6 +45,7 @@ public class AddCommand implements CommandExecutor {
                                 PermissionFinder.perms.playerAdd(enteredPlayer, permissionNode.getName());
                                 sender.sendMessage(plugin.prefix + ChatColor.GREEN + permissionNode.getName() + "added to " + enteredPlayer.getName());
                                 
+                                counter++;
                             }
                             
                         } else {
@@ -54,7 +55,7 @@ public class AddCommand implements CommandExecutor {
                         
                     } else if (plugin.getServer().getOfflinePlayer(args[1]) != null) {
                         
-                        Player enteredPlayer = (Player) plugin.getServer().getOfflinePlayer(args[1]);
+                        Player enteredPlayer = plugin.getServer().getOfflinePlayer(args[1]).getPlayer();
                         
                     } else {
                         sender.sendMessage(plugin.prefix + ChatColor.RED + "Player has not joined the server before");
