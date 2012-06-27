@@ -10,10 +10,16 @@ commands:
   dumpperms:
     description: Dump permission nodes for a plugin / all plugins to a text file(s).
     usage: /dumpperms [Plugin Name | all]
+  addperms:
+    description: Add all permission nodes for a plugin to a player.
+    usage: /addperms [Plugin] [Player]
 permissions:
   permissionfinder.findperms:
     description: Gives access to the findperms command.
     default: op
   permissionfinder.dumpperms:
     description: Gives access to the dumpperms command.
+    default: op
+  permissionfinder.addperms:
+    description: Gives access to the addperms command.
     default: op
